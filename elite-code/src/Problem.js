@@ -1,14 +1,10 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import problemData from './problems.json';
 
 function Problem() {
   const { id } = useParams();
-
-  const problem = {
-    id: id,
-    title: `Problem ${id}`,
-    description: `This is the description for Problem ${id}`,
-  };
+  const problem = problemData.find(problem => problem.id === parseInt(id));
 
   const handleRunClick = () => {
     // TODO

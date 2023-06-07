@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import problemData from './problems.json';
 
 function Problems() {
-  const problems = [
-    { id: 1, title: 'Problem 1' },
-    { id: 2, title: 'Problem 2' },
-    { id: 3, title: 'Problem 3' },
-  ];
+  const [problems, setProblems] = useState([]);
+
+  useEffect(() => {
+    setProblems(problemData);
+  }, []);
 
   return (
     <div>
