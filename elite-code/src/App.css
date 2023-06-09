@@ -50,17 +50,20 @@ th {
 tr:hover {background-color: #f5f5f5;}
 
 
-.problem-container {
+
+
+.split {
   display: flex;
-  justify-content: space-between;
+  height: 100vh;
 }
 
-.problem-description {
-  flex: 1;
-  margin-right: 20px;
+.gutter {
+  background-color: #eee;
+  background-repeat: no-repeat;
+  background-position: 50%;
 }
-
-.problem-editor {
-  flex: 1;
+.gutter.gutter-horizontal {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2P4DwABAQEAG7buVgAAAABJRU5ErkJggg==');
+  cursor: ew-resize;
 }
 

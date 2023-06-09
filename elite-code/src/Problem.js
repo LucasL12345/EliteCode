@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import problemData from './problems.json';
 import AceEditor from 'react-ace';
+import Split from 'react-split';
 
 import 'ace-builds/src-noconflict/mode-python';
 import 'ace-builds/src-noconflict/theme-monokai';
+
 
 function Problem() {
   const { id } = useParams();
@@ -31,13 +33,24 @@ function Problem() {
   };
 
   return (
-    <div className="problem-container">
-      <div className="problem-description">
+    <Split 
+        sizes={[50, 50]} 
+        minSize={100} 
+        expandToMin={true} 
+        gutterSize={10} 
+        className="split"
+        gutter={(index, direction) => {
+            const gutter = document.createElement('div');
+            gutter.className = `gutter gutter-${direction}`;
+            return gutter;
+        }}
+    >
+      <div>
         <h2>{problem.title}</h2>
         <h3>Description</h3>
         <p>{problem.description}</p>
       </div>
-      <div className="problem-editor">
+      <div>
         <h3>Editor</h3>
         <AceEditor
           mode="python"
@@ -50,7 +63,7 @@ function Problem() {
         <h3>Output</h3>
         <textarea readOnly value={output} />
       </div>
-    </div>
+    </Split>
   );
 }
 
