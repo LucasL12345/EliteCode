@@ -31,26 +31,24 @@ function Problem() {
   };
 
   return (
-    <div>
-      <h2>{problem.title}</h2>
-      <div>
-        <div>
-          <h3>Description</h3>
-          <p>{problem.description}</p>
-        </div>
-        <div>
-          <h3>Editor</h3>
-          <AceEditor
-            mode="python"
-            theme="monokai"
-            onChange={handleCodeChange}
-            name="UNIQUE_ID_OF_DIV"
-            editorProps={{ $blockScrolling: true }}
-          />
-          <button onClick={handleRunClick}>Run</button>
-          <h3>Output</h3>
-          <textarea readOnly value={output} />
-        </div>
+    <div className="problem-container">
+      <div className="problem-description">
+        <h2>{problem.title}</h2>
+        <h3>Description</h3>
+        <p>{problem.description}</p>
+      </div>
+      <div className="problem-editor">
+        <h3>Editor</h3>
+        <AceEditor
+          mode="python"
+          theme="monokai"
+          onChange={handleCodeChange}
+          name="UNIQUE_ID_OF_DIV"
+          editorProps={{ $blockScrolling: true }}
+        />
+        <button onClick={handleRunClick}>Run</button>
+        <h3>Output</h3>
+        <textarea readOnly value={output} />
       </div>
     </div>
   );
