@@ -51,19 +51,22 @@ function Problem() {
         <p>{problem.description}</p>
       </div>
       <div>
-        <h3>Editor</h3>
-        <AceEditor
-            mode="python"
-            theme="monokai"
-            onChange={handleCodeChange}
-            editorProps={{ $blockScrolling: true }}
-            wrapEnabled={true}
-            style={{ width: '100%' }}
-        />
-        <button onClick={handleRunClick}>Run</button>
-        <h3>Output</h3>
-        <textarea readOnly value={output} />
-      </div>
+  <h3>Editor</h3>
+  <AceEditor
+      mode="python"
+      theme="monokai"
+      onChange={handleCodeChange}
+      editorProps={{ $blockScrolling: true }}
+      wrapEnabled={true}
+      style={{ width: '100%' }}
+  />
+  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+    <h3>Output</h3>
+    <button onClick={handleRunClick}>Run</button>
+  </div>
+  <textarea readOnly value={output} />
+</div>
+
     </Split>
   );
 }
