@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import problemData from './problems.json';
+import AceEditor from 'react-ace';
+
+import 'ace-builds/src-noconflict/mode-python';
+import 'ace-builds/src-noconflict/theme-monokai';
 
 function Problem() {
   const { id } = useParams();
@@ -9,8 +13,8 @@ function Problem() {
   const [code, setCode] = useState('');
   const [output, setOutput] = useState('');
 
-  const handleCodeChange = (event) => {
-    setCode(event.target.value);
+  const handleCodeChange = (newCode) => {
+    setCode(newCode);
   };
 
   const handleRunClick = async () => {
@@ -36,7 +40,13 @@ function Problem() {
         </div>
         <div>
           <h3>Editor</h3>
-          <textarea value={code} onChange={handleCodeChange} />
+          <AceEditor
+            mode="python"
+            theme="monokai"
+            onChange={handleCodeChange}
+            name="UNIQUE_ID_OF_DIV"
+            editorProps={{ $blockScrolling: true }}
+          />
           <button onClick={handleRunClick}>Run</button>
           <h3>Output</h3>
           <textarea readOnly value={output} />
