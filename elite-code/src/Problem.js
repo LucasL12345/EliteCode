@@ -53,11 +53,12 @@ function Problem() {
       <div>
         <h3>Editor</h3>
         <AceEditor
-          mode="python"
-          theme="monokai"
-          onChange={handleCodeChange}
-          name="UNIQUE_ID_OF_DIV"
-          editorProps={{ $blockScrolling: true }}
+            mode="python"
+            theme="monokai"
+            onChange={handleCodeChange}
+            editorProps={{ $blockScrolling: true }}
+            wrapEnabled={true}
+            style={{ width: '100%' }}
         />
         <button onClick={handleRunClick}>Run</button>
         <h3>Output</h3>
