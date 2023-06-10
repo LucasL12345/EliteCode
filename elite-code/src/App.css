@@ -93,7 +93,6 @@ button:hover {
 
 textarea {
   width: 100%;
-  height: calc(200px - 20px);
   padding: 40px;
   box-sizing: border-box;
   border: 2px solid #ccc;
@@ -110,4 +109,8 @@ textarea {
   justify-content: space-between;
   align-items: center;
   margin-top: 10px;
+}
+
+.ace-editor {
+  font-size: 18px !important;
 }

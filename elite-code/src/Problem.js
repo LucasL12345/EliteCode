@@ -58,6 +58,7 @@ function Problem() {
                     editorProps={{ $blockScrolling: true }}
                     wrapEnabled={true}
                     style={{ width: '100%' }}
+                    className="ace-editor"
                 />
                 <div className="output-section">
                     <h3>Output</h3>
