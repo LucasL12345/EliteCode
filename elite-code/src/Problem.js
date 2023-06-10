@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import problemData from './problems.json';
 import AceEditor from 'react-ace';
@@ -11,8 +11,12 @@ function Problem() {
     const { id } = useParams();
     const problem = problemData.find(problem => problem.id === parseInt(id));
 
-    const [code, setCode] = useState('');
+    const [code, setCode] = useState(problem.boilerplate);
     const [output, setOutput] = useState('');
+
+    useEffect(() => {
+        setCode(problem.boilerplate);
+    }, [problem]);
 
     const handleCodeChange = (newCode) => {
         setCode(newCode);
@@ -20,16 +24,23 @@ function Problem() {
 
     const handleRunClick = async () => {
         const response = await fetch('http://localhost:4000/run', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ code }),
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ code, problemId: id }),
         });
+      
+        const result = await response.json();
+        
+        if(result.output) {
+          setOutput(result.output);
+        } else {
+          console.error('Failed to execute code:', result);
+        }
+      };
 
-        const output = await response.text();
-        setOutput(output);
-    };
+    
 
     return (
         <Split
@@ -55,6 +66,7 @@ function Problem() {
                     mode="python"
                     theme="monokai"
                     onChange={handleCodeChange}
+                    value={code}
                     editorProps={{ $blockScrolling: true }}
                     wrapEnabled={true}
                     style={{ width: '100%' }}
