@@ -2,20 +2,35 @@
     {
       "id": 1,
       "title": "Problem 1",
-      "description": "This is problem 1 description!!!",
-      "boilerplate": "def sort_list(lst):\n"
+      "description": "given an array of integers, return the list sorted in non-decreasing order",
+      "functionName": "sort_list",
+      "boilerplate": "def sort_list(list):\n    # Write your code here\n    return\n",
+      "testCases": [
+        {
+          "input": [4,2,3,5,1],
+          "expectedOutput": [1,2,3,4,5]
+        },
+        {
+          "input": [1],
+          "expectedOutput": [1]
+        }
+      ]
     },
     {
       "id": 2,
       "title": "Problem 2",
-      "description": "This is problem 2 description.",
-      "boilerplate": "def sort_list(lst):\n"
-    },
-    {
-        "id": 3,
-        "title": "Problem 3",
-        "description": "This is problem 3 description!",
-        "boilerplate": "def sort_list(lst):\n"
-      }
+      "description": "return the sum of all numbers in the array",
+      "functionName": "sum_list",
+      "boilerplate": "def sum_list(list):\n    # Write your code here\n    return\n",
+      "testCases": [
+        {
+            "input": [3,4,5],
+            "expectedOutput": 12
+        },
+        {
+            "input": [1],
+            "expectedOutput": 1
+        }
+      ]
+    }
 ]
-  

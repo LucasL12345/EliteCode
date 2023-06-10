@@ -24,12 +24,13 @@ function Problem() {
 
     const handleRunClick = async () => {
         const response = await fetch('http://localhost:4000/run', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ code, problemId: id }),
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ code, functionName: problem.functionName, testCases: problem.testCases }),
         });
+        
       
         const result = await response.json();
         
