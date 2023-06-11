@@ -100,53 +100,62 @@ function Problem() {
                     <button className="run-button" onClick={handleRunClick}>Run</button>
                 </div>
                 <div className="output-container">
-                    <h2 style={{ color: results.every(result => result.status === 'passed') ? 'green' : 'red' }}>
-                        {results.every(result => result.status === 'passed') ? 'Tests Passed' : 'Tests Failed'}
-                    </h2>
+                    {results.length === 0 ? (
+                        <h4 style={{ color: 'grey' }}>Please run your code first</h4>
+                    ) : (
+                        <>
+                            <h2 style={{ color: results.every(result => result.status === 'passed') ? 'green' : 'red' }}>
+                                {results.every(result => result.status === 'passed') ? 'Tests Passed' : 'Tests Failed'}
+                            </h2>
 
-                    <div>
-                        {results.map((result, index) => (
-                            <button
-                                key={index}
-                                className={`case-button ${result.status} ${selectedTestCase === index ? 'selected' : ''}`}
-                                onClick={() => setSelectedTestCase(index)}
-                            >
-                                Case {index + 1}
-                            </button>
-                        ))}
-                    </div>
-
-                    {results.length > 0 && (
-                        <div>
-                            <div className="case-detail-section">
-                                <h3>Input</h3>
-                                <div className="case-detail-container">
-                                    <p>{JSON.stringify(results[selectedTestCase].input)}</p>
-                                </div>
+                            <div>
+                                {results.map((result, index) => (
+                                    <button
+                                        key={index}
+                                        className={`case-button ${result.status} ${selectedTestCase === index ? 'selected' : ''}`}
+                                        onClick={() => setSelectedTestCase(index)}
+                                    >
+                                        Case {index + 1}
+                                    </button>
+                                ))}
                             </div>
 
-                            <div className="case-detail-section">
-                                <h3>Expected Output</h3>
-                                <div className="case-detail-container">
-                                    <p>{JSON.stringify(results[selectedTestCase].expectedOutput)}</p>
-                                </div>
-                            </div>
+                            {results.length > 0 && (
+                                <div>
+                                    <div className="case-detail-section">
+                                        <h3>Input</h3>
+                                        <div className="case-detail-container">
+                                            <p>{JSON.stringify(results[selectedTestCase].input)}</p>
+                                        </div>
+                                    </div>
 
-                            <div className="case-detail-section">
-                                <h3>Output</h3>
-                                <div className="case-detail-container">
-                                    <p>{JSON.stringify(results[selectedTestCase].actualOutput)}</p>
-                                </div>
-                            </div>
+                                    <div className="case-detail-section">
+                                        <h3>Expected Output</h3>
+                                        <div className="case-detail-container">
+                                            <p>{JSON.stringify(results[selectedTestCase].expectedOutput)}</p>
+                                        </div>
+                                    </div>
 
-                            <div className="case-detail-section">
-                                <h3>Stdout</h3>
-                                <div className="case-detail-container">
-                                    <p>{results[selectedTestCase].output}</p>
+                                    <div className="case-detail-section">
+                                        <h3>Output</h3>
+                                        <div className="case-detail-container">
+                                            <p>{JSON.stringify(results[selectedTestCase].actualOutput)}</p>
+                                        </div>
+                                    </div>
+
+                                    <div className="case-detail-section">
+                                        <h3>Stdout</h3>
+                                        <div className="case-detail-container">
+                                            <p>{results[selectedTestCase].output}</p>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
+                            )}
+                        </>
                     )}
+                </div>
+                <div className="space">
+                       
                 </div>
             </div>
         </Split>

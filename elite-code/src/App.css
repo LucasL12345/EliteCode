@@ -51,13 +51,17 @@ tr:hover {background-color: #f5f5f5;}
 
 .split {
   display: flex;
-  height: 100vh;
+  height: calc(100vh - 50px);
+  box-sizing: border-box;
 }
+
+
 
 .problem-section,
 .editor-section {
   padding: 20px;
 }
+
 
 .gutter {
   background-color: #eee;
@@ -106,6 +110,7 @@ textarea {
 
 .ace-editor {
   font-size: 18px !important;
+  margin-bottom: 15px;
 }
 
 
@@ -164,4 +169,9 @@ textarea {
 
 .case-detail-container p {
   margin: 0;
+}
+
+
+.space {
+  height: 50px;
 }
