@@ -4,7 +4,7 @@
       "title": "Problem 1",
       "description": "given an array of integers, return the list sorted in non-decreasing order",
       "functionName": "sort_list",
-      "boilerplate": "def sort_list(list):\n    # Write your code here\n    return\n",
+      "boilerplate": "def sort_list(lst):\n    # Write your code here\n    return\n",
       "testCases": [
         {
           "input": [4,2,3,5,1],
@@ -21,7 +21,7 @@
       "title": "Problem 2",
       "description": "return the sum of all numbers in the array",
       "functionName": "sum_list",
-      "boilerplate": "def sum_list(list):\n    # Write your code here\n    return\n",
+      "boilerplate": "def sum_list(lst):\n    # Write your code here\n    return\n",
       "testCases": [
         {
             "input": [3,4,5],
@@ -38,7 +38,7 @@
       "title": "Problem 3",
       "description": "return the sum of all numbers in the array",
       "functionName": "sum_list",
-      "boilerplate": "def sum_list(list):\n    # Write your code here\n    return\n",
+      "boilerplate": "def sum_list(lst):\n    # Write your code here\n    return\n",
       "testCases": [
         {
             "input": [3,4,5],
@@ -55,7 +55,7 @@
       "title": "Problem 4",
       "description": "return the sum of all numbers in the array",
       "functionName": "sum_list",
-      "boilerplate": "def sum_list(list):\n    # Write your code here\n    return\n",
+      "boilerplate": "def sum_list(lst):\n    # Write your code here\n    return\n",
       "testCases": [
         {
             "input": [3,4,5],
