@@ -46,7 +46,7 @@ function Problem() {
             if (response.ok) {
                 const result = await response.json();
                 const { output, status } = result;
-            
+
                 if (Array.isArray(output)) {
                     setResults(output);
                 } else if (typeof output === 'string') {
@@ -57,7 +57,7 @@ function Problem() {
                 }
             } else {
                 console.error('Error from server:', response.status, response.statusText);
-            }            
+            }
         } catch (error) {
             console.error('Error occurred:', error);
         }
@@ -96,52 +96,58 @@ function Problem() {
                     className="ace-editor"
                 />
                 <div className="run-section">
-                    <h3>Output</h3>
-                    <button onClick={handleRunClick}>Run</button>
+                    <h3>Result</h3>
+                    <button className="run-button" onClick={handleRunClick}>Run</button>
+                </div>
+                <div className="output-container">
+                    <h2 style={{ color: results.every(result => result.status === 'passed') ? 'green' : 'red' }}>
+                        {results.every(result => result.status === 'passed') ? 'Tests Passed' : 'Tests Failed'}
+                    </h2>
+
+                    <div>
+                        {results.map((result, index) => (
+                            <button
+                                key={index}
+                                className={`case-button ${result.status} ${selectedTestCase === index ? 'selected' : ''}`}
+                                onClick={() => setSelectedTestCase(index)}
+                            >
+                                Case {index + 1}
+                            </button>
+                        ))}
+                    </div>
 
                     {results.length > 0 && (
                         <div>
-                            <h1 style={{ color: results.every(result => result.status === 'passed') ? 'green' : 'red' }}>
-                                {results.every(result => result.status === 'passed') ? 'Tests Passed' : 'Tests Failed'}
-                            </h1>
-
-                            <div>
-                                {results.map((result, index) => (
-                                    <button
-                                        key={index}
-                                        style={buttonStyle}
-                                        onClick={() => setSelectedTestCase(index)}
-                                    >
-                                        Case {index + 1}
-                                    </button>
-
-                                ))}
-                            </div>
-
-                            <div style={{ borderRadius: '10px', border: '1px solid', padding: '10px', margin: '10px 0' }}>
+                            <div className="case-detail-section">
                                 <h3>Input</h3>
-                                <p>{JSON.stringify(results[selectedTestCase].input)}</p>
+                                <div className="case-detail-container">
+                                    <p>{JSON.stringify(results[selectedTestCase].input)}</p>
+                                </div>
                             </div>
 
-                            <div style={{ borderRadius: '10px', border: '1px solid', padding: '10px', margin: '10px 0' }}>
+                            <div className="case-detail-section">
                                 <h3>Expected Output</h3>
-                                <p>{JSON.stringify(results[selectedTestCase].expectedOutput)}</p>
+                                <div className="case-detail-container">
+                                    <p>{JSON.stringify(results[selectedTestCase].expectedOutput)}</p>
+                                </div>
                             </div>
 
-                            <div style={{ borderRadius: '10px', border: '1px solid', padding: '10px', margin: '10px 0' }}>
+                            <div className="case-detail-section">
                                 <h3>Output</h3>
-                                <p>{JSON.stringify(results[selectedTestCase].actualOutput)}</p>
+                                <div className="case-detail-container">
+                                    <p>{JSON.stringify(results[selectedTestCase].actualOutput)}</p>
+                                </div>
                             </div>
 
-                            <div style={{ borderRadius: '10px', border: '1px solid', padding: '10px', margin: '10px 0' }}>
+                            <div className="case-detail-section">
                                 <h3>Stdout</h3>
-                                <p>{results[selectedTestCase].output}</p>
+                                <div className="case-detail-container">
+                                    <p>{results[selectedTestCase].output}</p>
+                                </div>
                             </div>
                         </div>
                     )}
                 </div>
-
-                <textarea readOnly value={output} />
             </div>
         </Split>
     );
