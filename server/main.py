@@ -17,6 +17,9 @@ def main():
     # Create a dictionary for local variables
     local_vars = {}
 
+    # Declare the response variable
+    response = []
+
     # Execute the code
     exec(code, globals(), local_vars)
 
@@ -36,14 +39,18 @@ def main():
         try:
             result = function(test_input)
         except Exception as e:
-            print(json.dumps({"output": f"An error occurred while executing the function: {str(e)}"}))
-            return
+            response.append({"output": f"An error occurred while executing the function: {str(e)}", "status": "error"})
+            continue
 
         # Check if the result is correct
         if result == expected_output:
-            print(json.dumps({"output": f"Test case {i+1} passed!"}))
+            response.append({"output": f"Test case {i+1} passed!", "input": test_input, "expectedOutput": expected_output, "actualOutput": result, "status": "passed"})
         else:
-            print(json.dumps({"output": f"Test case {i+1} failed. Expected {expected_output}, but got {result}."}))
+            response.append({"output": f"Test case {i+1} failed. Expected {expected_output}, but got {result}.", "input": test_input, "expectedOutput": expected_output, "actualOutput": result, "status": "failed"})
+
+    # Return the response
+    print(json.dumps({"output": response, "status": all(test['status'] == 'passed' for test in response)}))
+
 
 # Start process
 if __name__ == '__main__':

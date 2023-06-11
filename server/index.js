@@ -21,11 +21,21 @@ app.post('/run', (req, res) => {
       if (err) {
         res.send(err);
       } else {
-        // Send the output as a JSON response
-        res.json({output: output});
+        // Parse the output string back into JSON
+        let outputJson;
+        try {
+          outputJson = JSON.parse(output);
+        } catch (error) {
+          console.error('Could not parse output from Python script:', error);
+          res.status(500).json({ error: 'Failed to parse output from Python script' });
+          return;
+        }
+        
+        res.json(outputJson);
       }
     });
-  });
+});
+
   
 
 app.listen(4000, () => console.log('Server running on port 4000'));
