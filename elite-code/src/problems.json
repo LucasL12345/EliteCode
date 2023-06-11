@@ -32,5 +32,39 @@
             "expectedOutput": 1
         }
       ]
+    },
+    {
+      "id": 3,
+      "title": "Problem 3",
+      "description": "return the sum of all numbers in the array",
+      "functionName": "sum_list",
+      "boilerplate": "def sum_list(list):\n    # Write your code here\n    return\n",
+      "testCases": [
+        {
+            "input": [3,4,5],
+            "expectedOutput": 12
+        },
+        {
+            "input": [1],
+            "expectedOutput": 1
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Problem 4",
+      "description": "return the sum of all numbers in the array",
+      "functionName": "sum_list",
+      "boilerplate": "def sum_list(list):\n    # Write your code here\n    return\n",
+      "testCases": [
+        {
+            "input": [3,4,5],
+            "expectedOutput": 12
+        },
+        {
+            "input": [1],
+            "expectedOutput": 1
+        }
+      ]
     }
 ]
