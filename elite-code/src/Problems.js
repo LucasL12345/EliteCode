@@ -7,6 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
+import Chip from '@mui/material/Chip';
 import Typography from '@mui/material/Typography';
 import problemData from './problems.json';
 
@@ -16,6 +17,27 @@ function Problems() {
     useEffect(() => {
         setProblems(problemData);
     }, []);
+
+    const DifficultyChip = ({ difficulty }) => {
+        let color = '';
+        switch (difficulty) {
+            case 'Easy':
+                color = 'green';
+                break;
+            case 'Medium':
+                color = 'orange';
+                break;
+            case 'Hard':
+                color = 'red';
+                break;
+            default:
+                color = 'black';
+        }
+
+        return (
+            <Chip label={difficulty} variant="outlined" sx={{ color: color, borderColor: color }} />
+        );
+    }
 
     return (
         <Box sx={{ width: '85%', margin: '0 auto', mt: 2, overflowX: 'auto' }}>
@@ -43,7 +65,9 @@ function Problems() {
                                 <TableCell sx={{ borderRight: 'none', borderLeft: 'none' }}>
                                     {problem.title}
                                 </TableCell>
-                                <TableCell align="center" sx={{ borderRight: 'none', borderLeft: 'none' }}>Placeholder</TableCell>
+                                <TableCell align="center" sx={{ borderRight: 'none', borderLeft: 'none' }}>
+                                    <DifficultyChip difficulty={problem.difficulty} />
+                                </TableCell>
                                 <TableCell align="center" sx={{ borderRight: 'none', borderLeft: 'none' }}>Placeholder</TableCell>
                             </TableRow>
 
