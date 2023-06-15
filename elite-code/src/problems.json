@@ -5,6 +5,7 @@
       "description": "given an array of integers, return the list sorted in non-decreasing order",
       "functionName": "sort_list",
       "boilerplate": "def sort_list(lst):\n    # Write your code here\n    return\n",
+      "difficulty": "Easy",
       "testCases": [
         {
           "input": [4,2,3,5,1],
@@ -22,6 +23,7 @@
       "description": "return the sum of all numbers in the array",
       "functionName": "sum_list",
       "boilerplate": "def sum_list(lst):\n    # Write your code here\n    return\n",
+      "difficulty": "Easy",
       "testCases": [
         {
             "input": [3,4,5],
@@ -39,6 +41,7 @@
       "description": "return the sum of all numbers in the array",
       "functionName": "sum_list",
       "boilerplate": "def sum_list(lst):\n    # Write your code here\n    return\n",
+      "difficulty": "Medium",
       "testCases": [
         {
             "input": [3,4,5],
@@ -56,6 +59,7 @@
       "description": "return the sum of all numbers in the array",
       "functionName": "sum_list",
       "boilerplate": "def sum_list(lst):\n    # Write your code here\n    return\n",
+      "difficulty": "Hard",
       "testCases": [
         {
             "input": [3,4,5],
