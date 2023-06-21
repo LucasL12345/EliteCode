@@ -41,7 +41,7 @@ function Problems() {
 
     return (
         <Box sx={{ width: '85%', margin: '0 auto', mt: 2, overflowX: 'auto' }}>
-            <Typography variant="h4" align="center" gutterBottom>Problems</Typography>
+            <Typography variant="h5" align="center" gutterBottom>Problems</Typography>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="problems table">
                     <TableHead>
