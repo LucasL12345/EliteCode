@@ -6,21 +6,26 @@ function RegistrationForm() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
-        const response = await fetch('http://localhost:4000/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ username, password }),
-        });
-
-        if (response.ok) {
-            window.location.href = '/login';
-        } else {
-            console.error('Error registering:', response.statusText);
+    
+        try {
+            const response = await fetch('http://localhost:4000/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password }),
+            });
+    
+            if (response.ok) {
+                window.location.href = '/login';
+            } else {
+                console.error('Error registering:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Fetch error:', error);
         }
     };
+    
 
     return (
         <form onSubmit={handleSubmit}>

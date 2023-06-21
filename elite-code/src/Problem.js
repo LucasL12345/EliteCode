@@ -39,8 +39,10 @@ function Problem() {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + localStorage.getItem('token'),
                 },
                 body: JSON.stringify({ code, functionName: problem.functionName, testCases: problem.testCases }),
+                credentials: 'include'
             });
 
             if (response.ok) {
@@ -155,7 +157,7 @@ function Problem() {
                     )}
                 </div>
                 <div className="space">
-                       
+
                 </div>
             </div>
         </Split>
