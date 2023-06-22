@@ -8,6 +8,7 @@ const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
 const User = require('./models/User');
 
+
 const app = express();
 
 mongoose.connect('mongodb://localhost/auth', {
