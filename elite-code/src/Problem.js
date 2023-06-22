@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import problemData from './problems.json';
 import AceEditor from 'react-ace';
 import Split from 'react-split';
+import axios from 'axios';
 
 import 'ace-builds/src-noconflict/mode-python';
 import 'ace-builds/src-noconflict/theme-monokai';
@@ -12,18 +13,9 @@ function Problem() {
     const problem = problemData.find(problem => problem.id === parseInt(id));
 
     const [code, setCode] = useState(problem.boilerplate);
-    const [output, setOutput] = useState('');
-
     const [selectedTestCase, setSelectedTestCase] = useState(0);
     const [results, setResults] = useState([]);
-
-    const buttonStyle = {
-        margin: "10px",
-        padding: "5px",
-        borderRadius: "5px",
-        backgroundColor: "#f0f0f0",
-        cursor: "pointer"
-    };
+    const [runError, setRunError] = useState(null);
 
     useEffect(() => {
         setCode(problem.boilerplate);
@@ -33,36 +25,34 @@ function Problem() {
         setCode(newCode);
     };
 
-    const handleRunClick = async () => {
-        try {
-            const response = await fetch('http://localhost:4000/run', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ code, functionName: problem.functionName, testCases: problem.testCases }),
-            });
+    const handleRunClick = () => {
+        const testCases = problem.testCases;
+        const functionName = problem.functionName;
 
-            if (response.ok) {
-                const result = await response.json();
-                const { output, status } = result;
+        const payload = {
+            code: code,
+            testCases: testCases,
+            functionName: functionName
+        };
 
-                if (Array.isArray(output)) {
-                    setResults(output);
-                } else if (typeof output === 'string') {
-                    setResults([{ output, status: 'error' }]);
-                } else {
-                    console.error('Output from server is not an array:', result.output);
-                    setResults([]);
-                }
-            } else {
-                console.error('Error from server:', response.status, response.statusText);
+        const token = localStorage.getItem('token');
+
+        axios.post('http://localhost:4000/run', payload, {
+            headers: {
+                Authorization: `Bearer ${token}`
             }
-        } catch (error) {
-            console.error('Error occurred:', error);
-        }
-    };
-
+        })
+            .then((res) => {
+                console.log(res.data);
+                setResults(res.data.output);
+                setRunError(null);
+            })
+            .catch((error) => {
+                console.error('Error from server:', error.response.status, error.response.statusText);
+                setRunError('Error from server: ' + error.response.status + ' ' + error.response.statusText);
+            });
+    }
+    
 
 
     return (
@@ -155,7 +145,7 @@ function Problem() {
                     )}
                 </div>
                 <div className="space">
-                       
+
                 </div>
             </div>
         </Split>
