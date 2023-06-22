@@ -52,8 +52,6 @@ function Problem() {
                 setRunError('Error from server: ' + error.response.status + ' ' + error.response.statusText);
             });
     }
-    
-
 
     return (
         <Split
