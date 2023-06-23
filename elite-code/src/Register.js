@@ -8,7 +8,9 @@ function Register() {
   const register = async (event) => {
     event.preventDefault();
     try {
-      await axios.post('http://localhost:4000/register', { username, password });
+      const response = await axios.post('http://localhost:4000/register', { username, password });
+      localStorage.setItem('token', response.data.token);
+      handleLogin(username);
       alert('Registered successfully!');
     } catch(err) {
       console.error(err);
