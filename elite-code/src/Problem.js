@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import problemData from './problems.json';
 import AceEditor from 'react-ace';
 import Split from 'react-split';
@@ -10,16 +10,29 @@ import 'ace-builds/src-noconflict/theme-monokai';
 
 function Problem() {
     const { id } = useParams();
+    const location = useLocation();
     const problem = problemData.find(problem => problem.id === parseInt(id));
 
     const [code, setCode] = useState(problem.boilerplate);
     const [selectedTestCase, setSelectedTestCase] = useState(0);
     const [results, setResults] = useState([]);
     const [runError, setRunError] = useState(null);
+    const [submitted, setSubmitted] = useState(false);
 
     useEffect(() => {
         setCode(problem.boilerplate);
     }, [problem]);
+
+    useEffect(() => {
+        const submittedState = localStorage.getItem(`submitted-${location.pathname}`);
+        if (submittedState) {
+            setSubmitted(JSON.parse(submittedState));
+        }
+    }, [location.pathname]);
+
+    useEffect(() => {
+        localStorage.setItem(`submitted-${location.pathname}`, JSON.stringify(submitted));
+    }, [submitted, location.pathname]);
 
     const handleCodeChange = (newCode) => {
         setCode(newCode);
@@ -51,7 +64,15 @@ function Problem() {
                 console.error('Error from server:', error.response.status, error.response.statusText);
                 setRunError('Error from server: ' + error.response.status + ' ' + error.response.statusText);
             });
-    }
+    };
+
+    const handleSubmitClick = () => {
+        if (results.length > 0 && results.every(result => result.status === 'passed')) {
+            setSubmitted(true);
+        } else {
+            alert('Please make sure all tests pass before submitting!');
+        }
+    };
 
     return (
         <Split
@@ -86,6 +107,9 @@ function Problem() {
                 <div className="run-section">
                     <h3>Result</h3>
                     <button className="run-button" onClick={handleRunClick}>Run</button>
+                    <button className="submit-button" onClick={handleSubmitClick}>
+                        {submitted ? 'Submitted' : 'Submit'}
+                    </button>
                 </div>
                 <div className="output-container">
                     {results.length === 0 ? (

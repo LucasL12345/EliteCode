@@ -11,6 +11,7 @@ import Chip from '@mui/material/Chip';
 import Typography from '@mui/material/Typography';
 import problemData from './problems.json';
 
+
 function Problems() {
     const [problems, setProblems] = useState([]);
 
@@ -68,7 +69,13 @@ function Problems() {
                                 <TableCell align="center" sx={{ borderRight: 'none', borderLeft: 'none' }}>
                                     <DifficultyChip difficulty={problem.difficulty} />
                                 </TableCell>
-                                <TableCell align="center" sx={{ borderRight: 'none', borderLeft: 'none' }}>Placeholder</TableCell>
+                                <TableCell align="center" sx={{ borderRight: 'none', borderLeft: 'none' }}>
+                                    {localStorage.getItem(`token`) ?
+                                        (localStorage.getItem(`submitted-/problems/${problem.id}`) === "true" ? 'Yes' : 'No')
+                                        :
+                                        'Login'
+                                    }
+                                </TableCell>
                             </TableRow>
 
                         ))}
