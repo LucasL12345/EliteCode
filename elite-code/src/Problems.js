@@ -10,6 +10,7 @@ import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
 import Typography from '@mui/material/Typography';
 import problemData from './problems.json';
+import axios from 'axios';
 
 
 function Problems() {
@@ -39,6 +40,31 @@ function Problems() {
             <Chip label={difficulty} variant="outlined" sx={{ color: color, borderColor: color }} />
         );
     }
+
+    useEffect(() => {
+        const fetchProblems = async () => {
+            try {
+                setProblems(problemData);
+                const token = localStorage.getItem('token');
+                const responses = await Promise.all(problemData.map(problem =>
+                    axios.get(`http://localhost:4000/problem/${problem.id}/completed`, {
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        }
+                    })
+                ));
+                setProblems(responses.map((response, i) => ({
+                    ...problemData[i],
+                    completed: response.data.completed
+                })));
+            } catch (err) {
+                console.error(err);
+            }
+        };
+        fetchProblems();
+    }, []);
+    
+
 
     return (
         <Box sx={{ width: '85%', margin: '0 auto', mt: 2, overflowX: 'auto' }}>
@@ -70,8 +96,8 @@ function Problems() {
                                     <DifficultyChip difficulty={problem.difficulty} />
                                 </TableCell>
                                 <TableCell align="center" sx={{ borderRight: 'none', borderLeft: 'none' }}>
-                                    {localStorage.getItem(`token`) ?
-                                        (localStorage.getItem(`submitted-/problems/${problem.id}`) === "true" ? 'Yes' : 'No')
+                                    {localStorage.getItem('token') ?
+                                        (problem.completed ? 'Yes' : 'No')
                                         :
                                         'Login'
                                     }

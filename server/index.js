@@ -8,7 +8,6 @@ const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
 const User = require('./models/User');
 
-
 const app = express();
 
 mongoose.connect('mongodb://localhost/auth', {
@@ -26,12 +25,15 @@ app.post('/register', async (req, res) => {
     try {
         const user = new User(req.body);
         await user.save();
-        res.json({ message: 'User registered successfully' });
+        
+        const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '2h' });
+        res.json({ token, message: 'User registered successfully' });
     } catch(err) {
         console.error(err);
         res.status(400).json({ error: 'Registration failed' });
     }
 });
+
 
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
@@ -81,6 +83,30 @@ app.post('/run', authenticate, (req, res) => {
     });
 });
 
-  
+app.post('/problem/:id/completed', authenticate, async (req, res) => {
+    try {
+        const user = await User.findById(req.auth._id);
+        if (!user.completedProblems.includes(req.params.id)) {
+            user.completedProblems.push(req.params.id);
+            await user.save();
+        }
+        res.json({ message: 'Problem marked as completed' });
+    } catch(err) {
+        console.error(err);
+        res.status(400).json({ error: 'Failed to mark problem as completed' });
+    }
+});
+
+app.get('/problem/:id/completed', authenticate, async (req, res) => {
+    try {
+        const user = await User.findById(req.auth._id);
+        const isCompleted = user.completedProblems.includes(req.params.id);
+        res.json({ isCompleted });
+    } catch(err) {
+        console.error(err);
+        res.status(400).json({ error: 'Failed to get completion status' });
+    }
+});
+
 
 app.listen(4000, () => console.log('Server running on port 4000'));

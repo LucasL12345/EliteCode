@@ -11,7 +11,12 @@ function Login({ handleLogin }) {
     setLoading(true);
     try {
       const response = await axios.post('http://localhost:4000/login', { username, password });
-      localStorage.setItem('token', response.data.token);
+      const { token } = response.data;
+      // Store the token in the backend
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      // Save username and token in local storage
+      localStorage.setItem('username', username);
+      localStorage.setItem('token', token);
       handleLogin(username);
       alert('Logged in successfully!');
     } catch (err) {

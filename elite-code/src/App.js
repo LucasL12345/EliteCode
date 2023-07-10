@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Home from './Home';
 import Problems from './Problems';
@@ -6,19 +6,27 @@ import Problem from './Problem';
 import Login from './Login';
 import Register from './Register';
 import './App.css';
+import axios from 'axios';
 
 function App() {
-  const [username, setUsername] = useState(localStorage.getItem('username') || '');
+  const [username, setUsername] = useState('');
+  useEffect(() => {
+    const storedUsername = localStorage.getItem('username');
+    if (storedUsername) {
+      setUsername(storedUsername);
+    }
+  }, []);
 
   const handleLogin = (username) => {
     setUsername(username);
-    localStorage.setItem('username', username);
+    localStorage.setItem('username', username); // Store the username in localStorage
   };
 
   const handleLogout = () => {
     setUsername('');
-    localStorage.removeItem('token');
-    localStorage.removeItem('username');
+    // Remove the token from the backend
+    delete axios.defaults.headers.common['Authorization'];
+    localStorage.removeItem('username'); // Remove the username from localStorage
   };
 
   return (
