@@ -90,6 +90,8 @@ function Problem() {
                     },
                 });
                 setSubmitted(true);
+                // Redirect back to the problems page with a unique query parameter
+                window.location.href = `/problems?completed=${Date.now()}`;
             } catch (err) {
                 console.error(err);
                 alert('Failed to submit the problem');
@@ -99,18 +101,19 @@ function Problem() {
         }
     };
 
+
     useEffect(() => {
         const checkCompletion = async () => {
             try {
                 const username = localStorage.getItem('username');
                 if (username) {
                     const token = localStorage.getItem('token');
-                    const response = await axios.get(`http://localhost:4000/problem/${id}/completed`, {
+                    const response = await axios.get(`http://localhost:4000/problem/${id.toString()}/completed`, {
                         headers: {
                             'Authorization': `Bearer ${token}`,
                         },
                     });
-                    setSubmitted(response.data.completed);
+                    setSubmitted(response.data.isCompleted);
                 }
             } catch (err) {
                 console.error(err);
@@ -118,6 +121,7 @@ function Problem() {
         };
         checkCompletion();
     }, [id]);
+
 
 
     return (
