@@ -1,0 +1,15 @@
+
+
+Major
+- module pop up for non logged-in users not showing to prompt them to login.
+- non logged-in users still show complete status of previously logged in user.
+
+
+Minor
+- redirect user to home/problems page after login/register
+- login/register page styling
+- TODO home page
+- problem page submit button functionality currently requires 'Run' button to be pressed first
+- TODO submitted page
+- TODO maybe problem stats e.g. completed problems, percentage of users completed problem
+- TODO add more problems
