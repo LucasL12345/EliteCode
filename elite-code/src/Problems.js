@@ -55,7 +55,7 @@ function Problems() {
                 ));
                 setProblems(responses.map((response, i) => ({
                     ...problemData[i],
-                    completed: response.data.completed === 'true'
+                    completed: response.data.isCompleted
                 })));
             } catch (err) {
                 console.error(err);
