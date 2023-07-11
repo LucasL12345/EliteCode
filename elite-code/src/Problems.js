@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -27,7 +28,6 @@ function Problems() {
         }
     };
     
-
     useEffect(() => {
         setProblems(problemData);
     }, []);
@@ -83,9 +83,6 @@ function Problems() {
     }, []);
     
 
-
-
-
     return (
         <Box sx={{ width: '85%', margin: '0 auto', mt: 2, overflowX: 'auto' }}>
             <Typography variant="h4" align="center" gutterBottom>Problems</Typography>
@@ -119,14 +116,12 @@ function Problems() {
                                     {localStorage.getItem('token') ?
                                         (problem.completed ? 'Yes' : 'No')
                                         :
-                                        'Login'
+                                        <Link to="/login" className="login-link">Login</Link>
                                     }
                                 </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
-
-
                 </Table>
             </TableContainer>
             <Modal
@@ -151,7 +146,6 @@ function Problems() {
                 <p>Please log in or register to access the problems.</p>
                 <button onClick={() => setModalIsOpen(false)}>Close</button>
             </Modal>
-
         </Box>
 
 
