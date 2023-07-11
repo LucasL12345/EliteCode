@@ -1,8 +1,6 @@
 
 
 Major
-- module pop up for non logged-in users not showing to prompt them to login.
-- non logged-in users still show complete status of previously logged in user.
 
 
 Minor
