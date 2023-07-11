@@ -1,14 +1,30 @@
 
 
 Major
+-----------------------------------------------------------------------------------------------------
+
 
 
 Minor
-- login/register page styling
-- forgot password
-- login prompt styling
-- problem page submit button functionality currently requires 'Run' button to be pressed first
-- TODO home page
-- TODO submitted page
-- TODO maybe problem stats e.g. completed problems, percentage of users completed problem
-- TODO add more problems
+-----------------------------------------------------------------------------------------------------
+
+Home:
+    - think of design 
+
+submitted page:
+    - think of design
+
+Problem: 
+    - submit button functionality currently requires 'Run' button to be pressed first
+
+Login/Register:
+    - add validation
+    - add options to register/login under box
+    - forgot password
+
+Problems: 
+    - login prompt styling
+    - add more problems
+    - (maybe add problem stats e.g. completed problems, percentage of users completed problem)
+
+
