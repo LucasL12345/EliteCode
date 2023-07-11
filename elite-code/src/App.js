@@ -19,14 +19,14 @@ function App() {
 
   const handleLogin = (username) => {
     setUsername(username);
-    localStorage.setItem('username', username); // Store the username in localStorage
+    localStorage.setItem('username', username);
   };
 
   const handleLogout = () => {
     setUsername('');
-    // Remove the token from the backend
     delete axios.defaults.headers.common['Authorization'];
-    localStorage.removeItem('username'); // Remove the username from localStorage
+    localStorage.removeItem('username');
+    localStorage.removeItem('token');
   };
 
   return (

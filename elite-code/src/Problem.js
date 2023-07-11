@@ -18,7 +18,7 @@ function Problem() {
     const [results, setResults] = useState([]);
     const [runError, setRunError] = useState(null);
     const [submitted, setSubmitted] = useState(false);
-
+    
     useEffect(() => {
         const problemValue = problemData.find((problem) => problem.id === parseInt(id));
         setProblem(problemValue);
