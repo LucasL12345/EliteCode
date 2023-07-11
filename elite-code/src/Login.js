@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Login({ handleLogin }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  
+  const navigate = useNavigate();
 
   const login = async (event) => {
     event.preventDefault();
@@ -12,13 +15,13 @@ function Login({ handleLogin }) {
     try {
       const response = await axios.post('http://localhost:4000/login', { username, password });
       const { token } = response.data;
-      // Store the token in the backend
+
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      // Save username and token in local storage
+
       localStorage.setItem('username', username);
       localStorage.setItem('token', token);
       handleLogin(username);
-      alert('Logged in successfully!');
+      navigate("/problems");
     } catch (err) {
       console.error(err);
       alert('Login failed');

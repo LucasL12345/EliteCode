@@ -6,8 +6,9 @@ Major
 Minor
 - redirect user to home/problems page after login/register
 - login/register page styling
-- TODO home page
+- login prompt styling
 - problem page submit button functionality currently requires 'Run' button to be pressed first
+- TODO home page
 - TODO submitted page
 - TODO maybe problem stats e.g. completed problems, percentage of users completed problem
 - TODO add more problems
