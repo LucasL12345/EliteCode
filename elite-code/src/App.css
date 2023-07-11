@@ -177,3 +177,79 @@ textarea {
 }
 
 
+/* LOGIN PAGE */
+
+.login-container,
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #fafafa;
+}
+
+
+.login-form,
+.register-form {
+  width: 350px;
+  background-color: #fff;
+  border: 1px solid #dbdbdb;
+  border-radius: 3px;
+  padding: 20px;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.login-form h2,
+.register-form h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 32px;
+  color: #333;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"],
+.register-form input[type="text"],
+.register-form input[type="password"] {
+  width: 100%;
+  padding: 11px;
+  margin-bottom: 10px;
+  border: 1px solid #dbdbdb;
+  border-radius: 3px;
+  font-size: 16px;
+}
+
+.login-form button,
+.register-form button {
+  width: 100%;
+  padding: 10px;
+  background-color: #3897f0;
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.login-form button:hover,
+.register-form button:hover {
+  background-color: #1877c7;
+}
+
+.login-form .loading,
+.register-form .loading {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.login-form .error,
+.register-form .error {
+  text-align: center;
+  color: #ed4956;
+  margin-top: 10px;
+}
+

@@ -31,7 +31,8 @@ function Login({ handleLogin }) {
 
 
   return (
-    <form onSubmit={login}>
+    <form onSubmit={login} className="login-form">
+      <h2>Elitecode</h2>
       <input
         type="text"
         placeholder="Username"

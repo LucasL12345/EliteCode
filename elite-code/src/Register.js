@@ -19,7 +19,8 @@ function Register({ handleLogin }) {
   };
 
   return (
-    <form onSubmit={register}>
+    <form onSubmit={register} className="register-form">
+      <h2> Elitecode </h2>
       <input type="text" placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} />
       <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
       <button type="submit">Register</button>
