@@ -8,6 +8,12 @@ Major
 Minor
 -----------------------------------------------------------------------------------------------------
 
+Navbar:
+    - styling
+
+User profile:
+    - think of design
+
 Home:
     - think of design 
 

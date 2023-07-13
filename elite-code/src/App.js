@@ -5,6 +5,7 @@ import Problems from './Problems';
 import Problem from './Problem';
 import Login from './Login';
 import Register from './Register';
+import Submitted from './Submitted'
 import './App.css';
 import axios from 'axios';
 
@@ -62,6 +63,7 @@ function App() {
           <Route path="/problems" element={<Problems username={username} />} />
           <Route path="/login" element={<Login handleLogin={handleLogin} />} />
           <Route path="/register" element={<Register handleLogin={handleLogin} />} />
+          <Route path="/submitted" element={<Submitted username={username} />} />
           <Route path="/" element={<Home />} />
         </Routes>
       </div>
