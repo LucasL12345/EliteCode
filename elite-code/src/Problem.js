@@ -8,6 +8,21 @@ import axios from 'axios';
 import 'ace-builds/src-noconflict/mode-python';
 import 'ace-builds/src-noconflict/theme-monokai';
 
+function TabButton({ name, isActive, onClick }) {
+    return (
+        <button
+            className={`tab-button ${isActive ? 'active' : ''}`}
+            onClick={onClick}
+        >
+            {name}
+        </button>
+    );
+}
+
+function TabView({ name, isActive, children }) {
+    return isActive ? <div className={`tab-view tab-view-${name}`}>{children}</div> : null;
+}
+
 function Problem() {
     const { id } = useParams();
     const location = useLocation();
@@ -18,7 +33,8 @@ function Problem() {
     const [results, setResults] = useState([]);
     const [runError, setRunError] = useState(null);
     const [submitted, setSubmitted] = useState(false);
-    
+    const [activeTab, setActiveTab] = useState('Description');
+
     useEffect(() => {
         const problemValue = problemData.find((problem) => problem.id === parseInt(id));
         setProblem(problemValue);
@@ -124,6 +140,7 @@ function Problem() {
 
 
 
+
     return (
         <>
             {problem ? (
@@ -140,10 +157,34 @@ function Problem() {
                     }}
                 >
                     <div className="problem-section">
-                        <h2>{problem.title}</h2>
-                        <h3>Description</h3>
-                        <p>{problem.description}</p>
+                        <div>
+                            <div className="tabs">
+                                {['Description', 'Solutions', 'Submissions'].map((tabName) => (
+                                    <TabButton
+                                        key={tabName}
+                                        name={tabName}
+                                        isActive={activeTab === tabName}
+                                        onClick={() => setActiveTab(tabName)}
+                                    />
+                                ))}
+                            </div>
+                            
+                            <TabView name='Description' isActive={activeTab === 'Description'}>
+                                <h2>{problem.title}</h2>
+                                <h3>Description</h3>
+                                <p>{problem.description}</p>
+                            </TabView>
+            
+                            <TabView name='Solutions' isActive={activeTab === 'Solutions'}>
+                                <h2>Solutions</h2>
+                            </TabView>
+            
+                            <TabView name='Submissions' isActive={activeTab === 'Submissions'}>
+                                <h2>Submissions</h2>
+                            </TabView>
+                        </div>
                     </div>
+                    
                     <div className="editor-section">
                         <h3>Editor</h3>
                         <AceEditor

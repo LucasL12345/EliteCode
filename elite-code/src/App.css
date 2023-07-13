@@ -169,6 +169,29 @@ textarea {
 
 
 
+
+.tab-button {
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  background: none;
+}
+
+.tab-button.active {
+  border-bottom: 3px solid black;
+}
+
+.tabs {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+
+
+
+
 .login-link {
   color: #1976d2;
   font-weight: bold;
