@@ -273,12 +273,12 @@ function Problem() {
                                     <div key={index} className="submission-container">
                                         <p className={`submission-status ${submission.status === 'Accepted' ? 'submission-status-accepted' : 'submission-status-rejected'}`}>{submission.status}</p>
                                         <p className="submission-time"> {new Intl.DateTimeFormat('en-GB', {
-                                                year: 'numeric',
-                                                month: 'long',
-                                                day: 'numeric',
-                                                hour: '2-digit',
-                                                minute: '2-digit'
-                                            }).format(new Date(submission.time))}
+                                            year: 'numeric',
+                                            month: 'long',
+                                            day: 'numeric',
+                                            hour: '2-digit',
+                                            minute: '2-digit'
+                                        }).format(new Date(submission.time))}
                                         </p>
                                     </div>
                                 ))}
@@ -299,14 +299,12 @@ function Problem() {
                             style={{ width: '100%' }}
                             className="ace-editor"
                         />
-                        <div className="run-section">
+                        <div class="run-section">
                             <h3>Result</h3>
-                            <button className="run-button" onClick={handleRunClick}>
-                                Run
-                            </button>
-                            <button className="submit-button" onClick={handleSubmitClick}>
-                                Submit
-                            </button>
+                            <div class="button-group">
+                                <button id="run" class="run-button" onClick={handleRunClick}>Run</button>
+                                <button id="submit" class="submit-button" onClick={handleSubmitClick}>Submit</button>
+                            </div>
                         </div>
                         <div className="output-container">
                             {results.length === 0 ? (
