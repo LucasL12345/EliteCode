@@ -8,6 +8,12 @@ import axios from 'axios';
 import 'ace-builds/src-noconflict/mode-python';
 import 'ace-builds/src-noconflict/theme-monokai';
 
+const TAB_NAMES = {
+    DESCRIPTION: 'Description',
+    SOLUTIONS: 'Solutions',
+    SUBMISSIONS: 'Submissions',
+};
+
 function TabButton({ name, isActive, onClick }) {
     return (
         <button
@@ -33,7 +39,8 @@ function Problem() {
     const [results, setResults] = useState([]);
     const [runError, setRunError] = useState(null);
     const [submitted, setSubmitted] = useState(false);
-    const [activeTab, setActiveTab] = useState('Description');
+    const [activeTab, setActiveTab] = useState(TAB_NAMES.DESCRIPTION);
+    const [submissions, setSubmissions] = useState([]);
 
     useEffect(() => {
         const problemValue = problemData.find((problem) => problem.id === parseInt(id));
@@ -62,6 +69,25 @@ function Problem() {
             localStorage.setItem(`submitted-${location.pathname}`, JSON.stringify(submitted));
         }
     }, [submitted, location.pathname]);
+
+    useEffect(() => {
+        const fetchSubmissions = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                const response = await axios.get(`http://localhost:4000/problem/${id}/submissions`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    },
+                });
+                setSubmissions(response.data);
+            } catch (err) {
+                console.error(err);
+                alert('Failed to fetch submissions');
+            }
+        };
+        fetchSubmissions();
+    }, [id]);
+    
 
     const handleCodeChange = (newCode) => {
         setCode(newCode);
@@ -97,26 +123,87 @@ function Problem() {
     };
 
     const handleSubmitClick = async () => {
+        const testCases = problem.testCases;
+        const functionName = problem.functionName;
+    
+        const payload = {
+            code: code,
+            testCases: testCases,
+            functionName: functionName,
+        };
+    
+        const token = localStorage.getItem('token');
+    
+        try {
+            const response = await axios.post('http://localhost:4000/run', payload, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            setResults(response.data.output);
+            setRunError(null);
+        } catch (error) {
+            console.error('Error from server:', error.response.status, error.response.statusText);
+            setRunError('Error from server: ' + error.response.status + ' ' + error.response.statusText);
+            return;
+        }
+    
         if (results.length > 0 && results.every((result) => result.status === 'passed')) {
             try {
-                const token = localStorage.getItem('token');
-                const response = await axios.post(`http://localhost:4000/problem/${id}/completed`, {}, {
+                await axios.post(`http://localhost:4000/problem/${id}/completed`, {}, {
                     headers: {
                         'Authorization': `Bearer ${token}`,
                     },
                 });
                 setSubmitted(true);
-                // Redirect back to the problems page with a unique query parameter
-                window.location.href = `/problems?completed=${Date.now()}`;
+                setActiveTab(TAB_NAMES.SUBMISSIONS);
+    
+                // Add the new submission
+                const newSubmission = {
+                    problemId: id,
+                    status: 'accepted',
+                    time: Date.now(),
+                };
+                setSubmissions((prevSubmissions) => [...prevSubmissions, newSubmission]);
+    
+                // Update the backend
+                try {
+                    await axios.post(`http://localhost:4000/problem/${id}/submissions`, newSubmission, {
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                        },
+                    });
+                } catch (err) {
+                    console.error(err);
+                    alert('Failed to save submission');
+                }
             } catch (err) {
                 console.error(err);
                 alert('Failed to submit the problem');
             }
         } else {
-            alert('Please make sure all tests pass before submitting!');
+            // Add the new submission
+            const newSubmission = {
+                problemId: id,
+                status: 'rejected',
+                time: Date.now(),
+            };
+            setSubmissions((prevSubmissions) => [...prevSubmissions, newSubmission]);
+    
+            // Update the backend
+            try {
+                await axios.post(`http://localhost:4000/problem/${id}/submissions`, newSubmission, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    },
+                });
+            } catch (err) {
+                console.error(err);
+                alert('Failed to save submission');
+            }
         }
     };
-
+    
 
     useEffect(() => {
         const checkCompletion = async () => {
@@ -159,7 +246,7 @@ function Problem() {
                     <div className="problem-section">
                         <div>
                             <div className="tabs">
-                                {['Description', 'Solutions', 'Submissions'].map((tabName) => (
+                                {Object.values(TAB_NAMES).map((tabName) => (
                                     <TabButton
                                         key={tabName}
                                         name={tabName}
@@ -168,23 +255,30 @@ function Problem() {
                                     />
                                 ))}
                             </div>
-                            
+
                             <TabView name='Description' isActive={activeTab === 'Description'}>
                                 <h2>{problem.title}</h2>
                                 <h3>Description</h3>
                                 <p>{problem.description}</p>
                             </TabView>
-            
+
                             <TabView name='Solutions' isActive={activeTab === 'Solutions'}>
                                 <h2>Solutions</h2>
                             </TabView>
-            
+
                             <TabView name='Submissions' isActive={activeTab === 'Submissions'}>
                                 <h2>Submissions</h2>
+                                {submissions.map((submission, index) => (
+                                    <div key={index}>
+                                        <p>Problem ID: {submission.problemId}</p>
+                                        <p>Status: {submission.status}</p>
+                                        <p>Time: {new Date(submission.time).toLocaleString()}</p>
+                                    </div>
+                                ))}
                             </TabView>
                         </div>
                     </div>
-                    
+
                     <div className="editor-section">
                         <h3>Editor</h3>
                         <AceEditor
@@ -203,7 +297,7 @@ function Problem() {
                                 Run
                             </button>
                             <button className="submit-button" onClick={handleSubmitClick}>
-                                {submitted ? 'Submitted' : 'Submit'}
+                                Submit
                             </button>
                         </div>
                         <div className="output-container">

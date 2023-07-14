@@ -88,6 +88,14 @@ app.post('/problem/:id/completed', authenticate, async (req, res) => {
         const user = await User.findById(req.auth._id);
         if (!user.completedProblems.includes(req.params.id)) {
             user.completedProblems.push(req.params.id);
+            
+            const newSubmission = {
+                problemId: req.params.id,
+                status: 'accepted',
+                time: new Date()
+            };
+            user.submissions.push(newSubmission);
+
             await user.save();
         }
         res.json({ message: 'Problem marked as completed' });
@@ -105,6 +113,31 @@ app.get('/problem/:id/completed', authenticate, async (req, res) => {
     } catch(err) {
         console.error(err);
         res.status(400).json({ error: 'Failed to get completion status' });
+    }
+});
+
+// get the list of submissions for a specific problem
+app.get('/problem/:id/submissions', authenticate, async (req, res) => {
+    try {
+        const user = await User.findById(req.auth._id);
+        const submissions = user.submissions.filter(submission => submission.problemId === req.params.id);
+        res.json(submissions);
+    } catch(err) {
+        console.error(err);
+        res.status(400).json({ error: 'Failed to get submissions' });
+    }
+});
+
+// save a submission for a specific problem
+app.post('/problem/:id/submissions', authenticate, async (req, res) => {
+    try {
+        const user = await User.findById(req.auth._id);
+        user.submissions.push(req.body);
+        await user.save();
+        res.json({ message: 'Submission saved' });
+    } catch(err) {
+        console.error(err);
+        res.status(400).json({ error: 'Failed to save submission' });
     }
 });
 

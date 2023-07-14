@@ -14,6 +14,16 @@ const userSchema = new mongoose.Schema({
     completedProblems: {
         type: [String],
         default: []
+    },
+    submissions: {
+        type: [
+            {
+                problemId: String,
+                status: String,
+                time: Date
+            }
+        ],
+        default: []
     }
 });
 
