@@ -36,16 +36,16 @@ function App() {
         <nav>
           <ul>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/" className={window.location.pathname === '/' ? 'active' : ''}>Home</Link>
             </li>
             <li>
-              <Link to="/problems">Problems</Link>
+              <Link to="/problems" className={window.location.pathname.startsWith('/problems') ? 'active' : ''}>Problems</Link>
             </li>
-            <li style={{ float: 'right' }}>
+            <li className="right">
               {username ? (
                 <>
-                  {username}
-                  <button onClick={handleLogout}>Logout</button>
+                  <span className="nav-username">{username}</span>
+                  <button onClick={handleLogout} className="nav-logout">Logout</button>
                 </>
               ) : (
                 <>
@@ -55,9 +55,9 @@ function App() {
                 </>
               )}
             </li>
-
           </ul>
         </nav>
+
         <Routes>
           <Route path="/problems/:id" element={<Problem username={username} />} />
           <Route path="/problems" element={<Problems username={username} />} />
