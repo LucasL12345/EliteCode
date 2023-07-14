@@ -189,6 +189,7 @@ function Problem() {
                 time: Date.now(),
             };
             setSubmissions((prevSubmissions) => [...prevSubmissions, newSubmission]);
+            setActiveTab(TAB_NAMES.SUBMISSIONS);
 
             // Update the backend
             try {
@@ -270,7 +271,7 @@ function Problem() {
                                 <h2>Submissions</h2>
                                 {submissions.slice().reverse().map((submission, index) => (
                                     <div key={index} className="submission-container">
-                                        <p className="submission-status">{submission.status}</p>
+                                        <p className={`submission-status ${submission.status === 'Accepted' ? 'submission-status-accepted' : 'submission-status-rejected'}`}>{submission.status}</p>
                                         <p className="submission-time"> {new Intl.DateTimeFormat('en-GB', {
                                                 year: 'numeric',
                                                 month: 'long',

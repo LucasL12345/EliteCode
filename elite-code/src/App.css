@@ -241,11 +241,15 @@ textarea {
   background-color: white;
   padding: 10px;
   margin-bottom: 10px;
+  font-weight: 400;
 }
 
-.submission-status {
-  font-weight: bold;
+.submission-status-accepted {
   color: rgb(0, 172, 0);
+}
+
+.submission-status-rejected {
+  color: red;
 }
 
 .submission-time {
