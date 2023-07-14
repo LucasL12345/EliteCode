@@ -188,6 +188,24 @@ textarea {
   text-align: left;
 }
 
+.submission-container {
+  border: 1px solid rgb(221, 221, 221);
+  border-radius: 5px;
+  background-color: white;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.submission-status {
+  font-weight: bold;
+  color: rgb(0, 172, 0);
+}
+
+.submission-time {
+  color: grey;
+}
+
+
 
 
 

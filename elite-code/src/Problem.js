@@ -87,7 +87,7 @@ function Problem() {
         };
         fetchSubmissions();
     }, [id]);
-    
+
 
     const handleCodeChange = (newCode) => {
         setCode(newCode);
@@ -125,15 +125,15 @@ function Problem() {
     const handleSubmitClick = async () => {
         const testCases = problem.testCases;
         const functionName = problem.functionName;
-    
+
         const payload = {
             code: code,
             testCases: testCases,
             functionName: functionName,
         };
-    
+
         const token = localStorage.getItem('token');
-    
+
         try {
             const response = await axios.post('http://localhost:4000/run', payload, {
                 headers: {
@@ -147,7 +147,7 @@ function Problem() {
             setRunError('Error from server: ' + error.response.status + ' ' + error.response.statusText);
             return;
         }
-    
+
         if (results.length > 0 && results.every((result) => result.status === 'passed')) {
             try {
                 await axios.post(`http://localhost:4000/problem/${id}/completed`, {}, {
@@ -157,15 +157,15 @@ function Problem() {
                 });
                 setSubmitted(true);
                 setActiveTab(TAB_NAMES.SUBMISSIONS);
-    
+
                 // Add the new submission
                 const newSubmission = {
                     problemId: id,
-                    status: 'accepted',
+                    status: 'Accepted',
                     time: Date.now(),
                 };
                 setSubmissions((prevSubmissions) => [...prevSubmissions, newSubmission]);
-    
+
                 // Update the backend
                 try {
                     await axios.post(`http://localhost:4000/problem/${id}/submissions`, newSubmission, {
@@ -185,11 +185,11 @@ function Problem() {
             // Add the new submission
             const newSubmission = {
                 problemId: id,
-                status: 'rejected',
+                status: 'Rejected',
                 time: Date.now(),
             };
             setSubmissions((prevSubmissions) => [...prevSubmissions, newSubmission]);
-    
+
             // Update the backend
             try {
                 await axios.post(`http://localhost:4000/problem/${id}/submissions`, newSubmission, {
@@ -203,7 +203,7 @@ function Problem() {
             }
         }
     };
-    
+
 
     useEffect(() => {
         const checkCompletion = async () => {
@@ -268,14 +268,21 @@ function Problem() {
 
                             <TabView name='Submissions' isActive={activeTab === 'Submissions'}>
                                 <h2>Submissions</h2>
-                                {submissions.map((submission, index) => (
-                                    <div key={index}>
-                                        <p>Problem ID: {submission.problemId}</p>
-                                        <p>Status: {submission.status}</p>
-                                        <p>Time: {new Date(submission.time).toLocaleString()}</p>
+                                {submissions.slice().reverse().map((submission, index) => (
+                                    <div key={index} className="submission-container">
+                                        <p className="submission-status">{submission.status}</p>
+                                        <p className="submission-time"> {new Intl.DateTimeFormat('en-GB', {
+                                                year: 'numeric',
+                                                month: 'long',
+                                                day: 'numeric',
+                                                hour: '2-digit',
+                                                minute: '2-digit'
+                                            }).format(new Date(submission.time))}
+                                        </p>
                                     </div>
                                 ))}
                             </TabView>
+
                         </div>
                     </div>
 
