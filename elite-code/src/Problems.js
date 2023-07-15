@@ -9,7 +9,6 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
-import Typography from '@mui/material/Typography';
 import problemData from './problems.json';
 import axios from 'axios';
 import Modal from 'react-modal';
@@ -85,7 +84,7 @@ function Problems() {
 
     return (
         <Box sx={{ width: '85%', margin: '0 auto', mt: 2, overflowX: 'auto' }}>
-            <Typography variant="h4" align="center" gutterBottom>Problems</Typography>
+            <h2 align="center" class="special-h2"> Problems</h2>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="problems table">
                     <TableHead>

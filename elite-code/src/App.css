@@ -68,17 +68,27 @@ nav ul li a.active {
 }
 
 
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 0.5em;
+  color: #444;
+}
 
 h2 {
-  color: #333;
+  color: #444;
 }
+
+.special-h2 {
+  font-size: 1.8em;
+  margin-top: 40px;
+  margin-bottom: 50px;
+}
+
 
 table {
   width: 100%;
-  margin-top: 20px;
   border-collapse: collapse;
   font-weight: 300;
-  
 }
 
 table, th, td {
@@ -369,7 +379,6 @@ textarea {
 
 
 
-
 /* HOME PAGE */
 
 .home-container {
@@ -389,10 +398,6 @@ textarea {
   animation: loadIn 0.8s forwards;
 }
 
-.home-text h1 {
-  font-size: 2.5em;
-  margin-bottom: 0.5em;
-}
 
 .home-text p {
   font-size: 1.2em;
