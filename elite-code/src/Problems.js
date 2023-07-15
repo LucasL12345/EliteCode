@@ -26,7 +26,7 @@ function Problems() {
             setModalIsOpen(true);
         }
     };
-    
+
     useEffect(() => {
         setProblems(problemData);
     }, []);
@@ -80,7 +80,7 @@ function Problems() {
         };
         fetchProblems();
     }, []);
-    
+
 
     return (
         <Box sx={{ width: '85%', margin: '0 auto', mt: 2, overflowX: 'auto' }}>
@@ -126,24 +126,15 @@ function Problems() {
             <Modal
                 isOpen={modalIsOpen}
                 onRequestClose={() => setModalIsOpen(false)}
-                style={{
-                    overlay: { backgroundColor: 'rgba(0, 0, 0, 0.75)' },
-                    content: {
-                        top: '50%',
-                        left: '50%',
-                        right: 'auto',
-                        bottom: 'auto',
-                        marginRight: '-50%',
-                        transform: 'translate(-50%, -50%)',
-                        backgroundColor: '#fff',
-                        borderRadius: '4px',
-                        padding: '20px'
-                    },
-                }}
+                className="Modal"
+                overlayClassName="Overlay"
             >
-                <h2>You are not logged in</h2>
-                <p>Please log in or register to access the problems.</p>
-                <button onClick={() => setModalIsOpen(false)}>Close</button>
+                <h2>Not logged in</h2>
+                <p>Please login to continue</p>
+                <div className="modal-buttons">
+                    <Link to="/login" className="modal-button login">Login</Link>
+                    <Link to="/register" className="modal-button register">Register</Link>
+                </div>
             </Modal>
         </Box>
 
