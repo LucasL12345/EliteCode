@@ -9,19 +9,17 @@ Minor
 -----------------------------------------------------------------------------------------------------
 
 Navbar:
-    - styling
+    - styling/allow for user profile settings etc
 
 User profile:
     - think of design
+    - (maybe add problem stats e.g. completed problems, percentage of users completed problem)
 
 Home:
-    - think of design 
-
-submitted page:
-    - think of design
+    - implement button
 
 Problem: 
-    - submit button functionality currently requires 'Run' button to be pressed first
+    - resizing bar(s) styling
 
 Login/Register:
     - add validation
@@ -31,6 +29,5 @@ Login/Register:
 Problems: 
     - login prompt styling
     - add more problems
-    - (maybe add problem stats e.g. completed problems, percentage of users completed problem)
 
 
