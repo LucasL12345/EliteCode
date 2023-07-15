@@ -38,7 +38,7 @@
     {
       "id": 3,
       "title": "Problem 3",
-      "description": "return the sum of all numbers in the array",
+      "description": "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target. \nYou may assume that each input would have exactly one solution, and you may not use the same element twice. \nYou can return the answer in any order.",
       "functionName": "sum_list",
       "boilerplate": "def sum_list(lst):\n    # Write your code here\n    return\n",
       "difficulty": "Medium",

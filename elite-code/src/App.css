@@ -146,6 +146,7 @@ textarea {
 .ace-editor {
   font-size: 18px !important;
   margin-bottom: 15px;
+  margin-top: 26px;
 }
 
 
@@ -263,6 +264,16 @@ textarea {
   gap: 30px;
   margin-bottom: 10px;
   text-align: left;
+}
+
+.problem-description-container {
+  border: 1px solid rgb(221, 221, 221);
+  border-radius: 5px;
+  background-color: white;
+  padding: 20px 35px 35px;
+  margin-top: 26px;
+  margin-bottom: 10px;
+  font-weight: 400;
 }
 
 .submission-container {

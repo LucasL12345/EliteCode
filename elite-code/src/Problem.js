@@ -4,6 +4,7 @@ import problemData from './problems.json';
 import AceEditor from 'react-ace';
 import Split from 'react-split';
 import axios from 'axios';
+import Chip from '@mui/material/Chip';
 
 import 'ace-builds/src-noconflict/mode-python';
 import 'ace-builds/src-noconflict/theme-monokai';
@@ -205,6 +206,27 @@ function Problem() {
         }
     };
 
+    const DifficultyChip = ({ difficulty }) => {
+        let color = '';
+        switch (difficulty) {
+            case 'Easy':
+                color = 'green';
+                break;
+            case 'Medium':
+                color = 'orange';
+                break;
+            case 'Hard':
+                color = 'red';
+                break;
+            default:
+                color = 'black';
+        }
+
+        return (
+            <Chip label={difficulty} variant="outlined" sx={{ color: color, borderColor: color }} />
+        );
+    }
+
 
     useEffect(() => {
         const checkCompletion = async () => {
@@ -225,7 +247,6 @@ function Problem() {
         };
         checkCompletion();
     }, [id]);
-
 
 
 
@@ -258,9 +279,14 @@ function Problem() {
                             </div>
 
                             <TabView name='Description' isActive={activeTab === 'Description'}>
-                                <h2>{problem.title}</h2>
-                                <h3>Description</h3>
-                                <p>{problem.description}</p>
+                                <div className="problem-description-container">
+                                    <h2>{problem.title}</h2>
+                                    <DifficultyChip difficulty={problem.difficulty} />
+                                    <div style={{height: '26px'}}></div>
+                                    <div>{problem.description.split("\n").map((item, key) => {
+                                        return <span key={key}>{item}<br /><br /></span>
+                                    })}</div>
+                                </div>
                             </TabView>
 
                             <TabView name='Solutions' isActive={activeTab === 'Solutions'}>
