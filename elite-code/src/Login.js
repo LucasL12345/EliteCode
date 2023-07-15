@@ -5,13 +5,11 @@ import { useNavigate } from 'react-router-dom';
 function Login({ handleLogin }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
   
   const navigate = useNavigate();
 
   const login = async (event) => {
     event.preventDefault();
-    setLoading(true);
     try {
       const response = await axios.post('http://localhost:4000/login', { username, password });
       const { token } = response.data;
@@ -26,7 +24,6 @@ function Login({ handleLogin }) {
       console.error(err);
       alert('Login failed');
     }
-    setLoading(false);
   };
 
 
@@ -46,7 +43,6 @@ function Login({ handleLogin }) {
         onChange={(e) => setPassword(e.target.value)}
       />
       <button type="submit">Login</button>
-      {loading && <div>Loading...</div>}
     </form>
   );
 }
