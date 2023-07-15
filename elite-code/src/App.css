@@ -297,10 +297,12 @@ textarea {
 
 .submission-status-accepted {
   color: rgb(0, 172, 0);
+  font-weight: bold;
 }
 
 .submission-status-rejected {
   color: red;
+  font-weight: bold;
 }
 
 .submission-time {
@@ -523,9 +525,32 @@ textarea {
   margin-top: 20px;
 }
 
+
 @keyframes loadIn {
   to {
     opacity: 1;
     transform: translateX(0);
   }
 }
+
+
+@keyframes glitch {
+  0% {
+    transform: translate(0px, 0px);
+  }
+  70% {
+    transform: translate(0px, 0px);
+  }
+  80% {
+    transform: translate(4px, -3px);
+  }
+  100% {
+    transform: translate(0px, 0px);
+  }
+}
+
+.glitch {
+  animation: glitch 0.4s;
+}
+
+
