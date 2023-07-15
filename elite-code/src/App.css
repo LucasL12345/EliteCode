@@ -204,12 +204,13 @@ textarea {
 .case-button {
   border: 2px solid;
   background-color: transparent;
-  color: grey;
+  color: rgb(31, 31, 31);
+  cursor: pointer;
   margin: 10px;
   padding: 10px;
   border-radius: 15px;
   font-size: 16px;
-  font-weight: bold;
+  font-weight: normal;
 }
 
 .case-button.passed {
@@ -221,7 +222,8 @@ textarea {
 }
 
 .case-button.selected {
-  color: black;
+  border-width: 3px;
+  font-weight: bold;
 }
 
 .output-container {
@@ -229,6 +231,7 @@ textarea {
   padding: 10px;
   margin: 10px 0;
   border-radius: 10px;
+  background-color: white;
 }
 
 .case-detail-container {
