@@ -5,6 +5,7 @@ body {
   padding: 0;
   font-family: Arial, sans-serif;
   font-weight: 300;
+  background-color: #f6f6f6;
 }
 
 nav {
@@ -365,3 +366,71 @@ textarea {
   margin-top: 10px;
 }
 
+
+
+
+
+/* HOME PAGE */
+
+.home-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 80vh;
+  background-color: #f5f5f5;
+  color: #444;
+  padding: 2em;
+}
+
+.home-text {
+  max-width: 500px;
+  opacity: 0;
+  transform: translateX(-50px);
+  animation: loadIn 0.8s forwards;
+}
+
+.home-text h1 {
+  font-size: 2.5em;
+  margin-bottom: 0.5em;
+}
+
+.home-text p {
+  font-size: 1.2em;
+  line-height: 1.6;
+}
+
+.home-btn {
+  margin-top: 1em;
+  padding: 0.8em 1.8em;
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.home-btn:hover {
+  background-color: #0056b3;
+}
+
+.home-image {
+  max-width: 500px;
+  opacity: 0;
+  transform: translateX(50px);
+  animation: loadIn 0.8s 0.3s forwards;
+}
+
+.home-image img {
+  width: 100%;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+@keyframes loadIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
