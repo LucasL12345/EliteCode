@@ -78,6 +78,11 @@ h2 {
   color: #444;
 }
 
+h3 {
+  color: #444;
+  margin-left: 10px;
+}
+
 .special-h2 {
   font-size: 1.8em;
   margin-top: 40px;
@@ -228,7 +233,7 @@ textarea {
 
 .output-container {
   border: 1px solid #ccc;
-  padding: 10px;
+  padding: 26px;
   margin: 10px 0;
   border-radius: 10px;
   background-color: white;
