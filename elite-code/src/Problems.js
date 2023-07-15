@@ -12,6 +12,7 @@ import Chip from '@mui/material/Chip';
 import problemData from './problems.json';
 import axios from 'axios';
 import Modal from 'react-modal';
+import tick_img from './images/tick_img.png'
 
 
 function Problems() {
@@ -113,7 +114,7 @@ function Problems() {
                                 </TableCell>
                                 <TableCell align="center" sx={{ borderRight: 'none', borderLeft: 'none' }}>
                                     {localStorage.getItem('token') ?
-                                        (problem.completed ? 'Yes' : 'No')
+                                        (problem.completed ? <img src={tick_img} alt="img" style={{ height: '2em', width: 'auto' }}/> : '')
                                         :
                                         <Link to="/login" className="login-link">Login</Link>
                                     }
