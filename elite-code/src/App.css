@@ -86,17 +86,19 @@ h2 {
 
 
 table {
-  width: 100%;
-  border-collapse: collapse;
   font-weight: 300;
   opacity: 0;
+  border-spacing: 0;
+  border-collapse: separate;
   animation: loadIn 1s forwards;
+  overflow: auto;
 }
 
 table, th, td {
-  border: 1px solid #ddd;
   font-weight: 300;
 }
+
+
 
 th, td {
   padding: 15px;

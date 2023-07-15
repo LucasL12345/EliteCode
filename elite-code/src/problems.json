@@ -1,7 +1,7 @@
 [
     {
       "id": 1,
-      "title": "Problem 1",
+      "title": "Sorted list",
       "description": "given an array of integers, return the list sorted in non-decreasing order",
       "functionName": "sort_list",
       "boilerplate": "def sort_list(lst):\n    # Write your code here\n    return\n",
@@ -19,7 +19,7 @@
     },
     {
       "id": 2,
-      "title": "Problem 2",
+      "title": "Sum array",
       "description": "return the sum of all numbers in the array",
       "functionName": "sum_list",
       "boilerplate": "def sum_list(lst):\n    # Write your code here\n    return\n",
@@ -37,7 +37,7 @@
     },
     {
       "id": 3,
-      "title": "Problem 3",
+      "title": "Two sum",
       "description": "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target. \nYou may assume that each input would have exactly one solution, and you may not use the same element twice. \nYou can return the answer in any order.",
       "functionName": "sum_list",
       "boilerplate": "def sum_list(lst):\n    # Write your code here\n    return\n",
@@ -55,7 +55,7 @@
     },
     {
       "id": 4,
-      "title": "Problem 4",
+      "title": "Longest substring without repeating characters",
       "description": "return the sum of all numbers in the array",
       "functionName": "sum_list",
       "boilerplate": "def sum_list(lst):\n    # Write your code here\n    return\n",

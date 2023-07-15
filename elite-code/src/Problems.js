@@ -83,9 +83,9 @@ function Problems() {
 
 
     return (
-        <Box sx={{ width: '85%', margin: '0 auto', mt: 2, overflowX: 'auto' }}>
+        <Box sx={{ width: '75%', margin: '0 auto', mt: 2, overflow: 'auto' }}>
             <h2 align="center" class="special-h2"> Problems</h2>
-            <TableContainer component={Paper}>
+            <TableContainer component={Paper} elevation={0} style={{borderRadius: '10px'}}>
                 <Table sx={{ minWidth: 650 }} aria-label="problems table">
                     <TableHead>
                         <TableRow sx={{ backgroundColor: '#fff' }}>
