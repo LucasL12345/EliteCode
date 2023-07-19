@@ -8,6 +8,8 @@ import Chip from '@mui/material/Chip';
 
 import 'ace-builds/src-noconflict/mode-python';
 import 'ace-builds/src-noconflict/theme-monokai';
+import 'ace-builds/src-noconflict/theme-chrome';
+
 
 const TAB_NAMES = {
     DESCRIPTION: 'Description',
@@ -35,6 +37,7 @@ function Problem() {
     const location = useLocation();
 
     const [problem, setProblem] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
     const [code, setCode] = useState('');
     const [selectedTestCase, setSelectedTestCase] = useState(0);
     const [results, setResults] = useState([]);
@@ -43,20 +46,18 @@ function Problem() {
     const [activeTab, setActiveTab] = useState(TAB_NAMES.DESCRIPTION);
     const [submissions, setSubmissions] = useState([]);
 
-    useEffect(() => {
+    const fetchProblem = async () => {
         const problemValue = problemData.find((problem) => problem.id === parseInt(id));
-        setProblem(problemValue);
-
         if (problemValue) {
             setCode(problemValue.boilerplate);
+            setProblem(problemValue);
+            setIsLoading(false);
         }
-    }, [id]);
-
+    };
+    
     useEffect(() => {
-        if (problem) {
-            setCode(problem.boilerplate);
-        }
-    }, [problem]);
+        fetchProblem();
+    }, [id]);
 
     useEffect(() => {
         const submittedState = localStorage.getItem(`submitted-${location.pathname}`);
@@ -248,7 +249,11 @@ function Problem() {
         checkCompletion();
     }, [id]);
 
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
 
+    const numLines = problem.solution_code.split('\n').length;
 
     return (
         <>
@@ -282,7 +287,7 @@ function Problem() {
                                 <div className="problem-description-container">
                                     <h2>{problem.title}</h2>
                                     <DifficultyChip difficulty={problem.difficulty} />
-                                    <div style={{height: '26px'}}></div>
+                                    <div style={{ height: '26px' }}></div>
                                     <div>{problem.description.split("\n").map((item, key) => {
                                         return <span key={key}>{item}<br /><br /></span>
                                     })}</div>
@@ -290,7 +295,32 @@ function Problem() {
                             </TabView>
 
                             <TabView name='Solutions' isActive={activeTab === 'Solutions'}>
-                                <h2>Solutions</h2>
+                                <div className="problem-description-container">
+                                    <h2>Solutions</h2>
+                                    <div>{problem.solution_text.split("\n").map((item, key) => {
+                                        return <span key={key}>{item}<br /><br /></span>
+                                    })}</div>
+
+                                    <h3>Code</h3>
+                                    <AceEditor
+                                        mode="python"
+                                        theme="chrome"
+                                        value={problem.solution_code}
+                                        editorProps={{ $blockScrolling: true }}
+                                        wrapEnabled={true}
+                                        style={{ 
+                                            width: '100%', 
+                                            height: `${numLines * 24}px`, 
+                                            border: '1px solid grey',
+                                            borderRadius: '5px'
+                                        }}
+                                        className="ace-editor"
+                                        readOnly
+                                    />
+                                    <div style={{ height: '22px' }}></div>
+                                    <h4>Time complexity: {problem.solution_time_complexity}</h4>
+                                    <h4>Space complexity: {problem.solution_space_complexity}</h4>
+                                </div>
                             </TabView>
 
                             <TabView name='Submissions' isActive={activeTab === 'Submissions'}>
