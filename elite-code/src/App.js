@@ -5,7 +5,7 @@ import Problems from './Problems';
 import Problem from './Problem';
 import Login from './Login';
 import Register from './Register';
-import Submitted from './Submitted'
+import Submitted from './Submitted';
 import './App.css';
 import axios from 'axios';
 

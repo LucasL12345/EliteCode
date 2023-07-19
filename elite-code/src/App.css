@@ -534,23 +534,21 @@ textarea {
 }
 
 
-@keyframes glitch {
-  0% {
-    transform: translate(0px, 0px);
-  }
-  70% {
-    transform: translate(0px, 0px);
-  }
-  80% {
-    transform: translate(4px, -3px);
-  }
-  100% {
-    transform: translate(0px, 0px);
-  }
+.home-image {
+  position: relative;
 }
 
-.glitch {
-  animation: glitch 0.4s;
+.home-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.2s, filter 0.2s;
 }
+
+.home-img:hover {
+  transform: scale(1.1); 
+  filter: sepia(0.08); 
+}
+
 
 
